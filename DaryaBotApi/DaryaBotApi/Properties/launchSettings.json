@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DaryaBotApi": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "authenticationMode": "None",
+      "applicationUrl": "http://localhost:8000;http://localhost:5067",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AZURE_OPENAI__ENDPOINT": "https://ata-openai-service.openai.azure.com/",
+        "AZURE_OPENAI__DEPLOYMENTNAME": "gpt-4o"
+      }
+    }
+  }
+}

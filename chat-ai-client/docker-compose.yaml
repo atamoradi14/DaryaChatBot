@@ -1,0 +1,12 @@
+services:
+  Darya-chat-bot:
+      build:
+        context: .
+      ports:
+        - 4200:8080
+      container_name: DaryaChatBot
+      image: retina/ui
+      environment:
+        - BASE_API=http://localhost:8084
+        - TERELEASE=0.0.1
+        - APIKEY=123456789

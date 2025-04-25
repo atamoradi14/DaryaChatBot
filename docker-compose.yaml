@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  Darya-chat-bot:
+      build:
+        context: ./chat-ai-client
+        dockerfile: Dockerfile
+      ports:
+        - 4200:8080
+      container_name: DaryaChatBot
+      image: darya-chat-bot
+      environment:
+        - BASE_API=http://localhost:8084
+        - TERELEASE=0.0.1
+        # - APIKEY=123456789
+  darya-bot-api:
+    build:
+      context: ./DaryaBotApi
+      dockerfile: Dockerfile
+    ports:
+      - 8084:80
+    container_name: DaryaBotApi
+    environment:
+      - AZURE_OPENAI__ENDPOINT=https://ata-openai-service.openai.azure.com/
+      # - AZURE_OPENAI__APIKEY=
+      - AZURE_OPENAI__DEPLOYMENTNAME=gpt-4o
+    image: darya-bot-api

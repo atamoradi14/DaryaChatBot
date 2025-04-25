@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  darya-bot-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8084:80
+    container_name: DaryaBotApi
+    environment:
+      - AZURE_OPENAI__ENDPOINT=https://ata-openai-service.openai.azure.com/
+      # - AZURE_OPENAI__APIKEY=
+      - AZURE_OPENAI__DEPLOYMENTNAME=gpt-4o
+    image: darya-bot-api
