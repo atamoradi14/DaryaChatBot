@@ -1,0 +1,6 @@
+@DaryaBotApi_HostAddress = http://localhost:5067
+
+GET {{DaryaBotApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

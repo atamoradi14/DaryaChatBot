@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "CHSsNYfHSRBokYVmqWjkIOuTLLV7KTfuGXbyouUsRqA=",
+  "Source": "DaryaBotApi",
+  "BasePath": "_content/DaryaBotApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

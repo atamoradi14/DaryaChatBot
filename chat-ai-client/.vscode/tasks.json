@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: start",
+      "type": "npm",
+      "script": "start",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "typescript",
+          "source": "ts",
+          "applyTo": "closedDocuments",
+          "fileLocation": ["relative", "${cwd}"],
+          "pattern": [
+            {
+              "regexp": ".*",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*Compiled successfully.*",
+            "endsPattern": ".*Compiled successfully.*"
+          }
+        }
+      ]
+    },
+    {
+      "label": "npm: test:chrome",
+      "type": "npm",
+      "script": "test:chrome",
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

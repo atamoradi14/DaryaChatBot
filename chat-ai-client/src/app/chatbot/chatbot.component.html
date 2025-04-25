@@ -1,0 +1,90 @@
+<!-- pastel-cosmos sky; note the updated gradient + base text color -->
+<!-- <div class="h-screen w-full bg-gradient-to-b from-[#e7eaff] via-[#f5f2ff] to-white text-gray-900 relative overflow-hidden"> -->
+<div class="h-screen w-full bg-gradient-to-b from-[#0d0d1d] via-[#151531] to-[#1d1d3f] text-gray-900 relative overflow-hidden">
+
+    <!-- star layers (unchanged element structure) -->
+    <div id="stars"  class="absolute inset-0 pointer-events-none"></div>
+    <div id="stars2" class="absolute inset-0 pointer-events-none"></div>
+    <div id="stars3" class="absolute inset-0 pointer-events-none"></div>
+  
+    <div class="flex flex-col h-full">
+      <!-- Header -->
+      <header class="p-4 flex items-center gap-3">
+        <svg class="w-8 h-8 animate-pulse text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l1.09 3.32L16.36 6l-2.73 2 1.09 3.32L12 10l-2.73 2L10.36 6 7.55 5.32 12 2z"/>
+        </svg>
+        <h1 class="text-xl md:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+          DaryaBot
+        </h1>
+      </header>
+  
+      <!-- Chat board -->
+      <main id="chat-scroll-container" class="flex-1 overflow-y-auto px-4 space-y-4 pb-32">
+        <!-- identical message markup as before -->
+        <ng-container *ngFor="let m of messages">
+          <!-- user bubble -->
+          <div *ngIf="m.sender === 'user'" class="flex justify-end">
+            <div class="max-w-[80%] md:max-w-[60%] bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white rounded-xl p-3 shadow-lg">
+              <p class="whitespace-pre-wrap break-words">{{ m.text }}</p>
+            </div>
+          </div>
+  
+          <!-- bot bubble -->
+          <div *ngIf="m.sender === 'bot'" class="flex items-start gap-2">
+            <div class="w-8 h-8 flex-shrink-0 rounded-full bg-indigo-600 flex items-center justify-center animate-pulse shadow-md">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l1.09 3.32L16.36 6l-2.73 2 1.09 3.32L12 10l-2.73 2L10.36 6 7.55 5.32 12 2z"/>
+              </svg>
+            </div>
+  
+            <div class="max-w-[80%] md:max-w-[60%] bg-slate-800/70 border border-indigo-500/40 rounded-xl p-3 shadow-lg backdrop-blur-sm">
+              <ng-container *ngIf="!m.imageUrl; else imgTpl">
+                <p class="whitespace-pre-wrap break-words text-slate-100">{{ m.text }}</p>
+              </ng-container>
+              <ng-template #imgTpl>
+                <img [src]="m.imageUrl" class="rounded-lg max-h-64 object-cover">
+              </ng-template>
+            </div>
+          </div>
+        </ng-container>
+  
+        <!-- typing dots -->
+        <div *ngIf="isGenerating" class="flex items-start gap-2">
+          <div class="w-8 h-8 flex-shrink-0 rounded-full bg-indigo-600 flex items-center justify-center animate-pulse shadow-md"></div>
+          <div class="bg-slate-800/70 border border-indigo-500/40 rounded-xl p-3 shadow-lg backdrop-blur-sm">
+            <div class="flex gap-1">
+              <span class="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style="animation-delay:0s"></span>
+              <span class="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style="animation-delay:0.15s"></span>
+              <span class="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style="animation-delay:0.3s"></span>
+            </div>
+          </div>
+        </div>
+      </main>
+  
+      <!-- Input bar (unchanged) -->
+      <footer class="fixed bottom-0 left-0 w-full bg-white/70 backdrop-blur-lg">
+        <form (submit)="sendMessage()" class="max-w-4xl mx-auto p-4 flex items-center gap-3">
+          <!-- mic -->
+          <button type="button" class="p-2 rounded-full hover:bg-black/10 focus:outline-none">
+            <svg class="w-6 h-6 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm5 11a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zm-5 10a7 7 0 0 0 7-7h-2a5 5 0 0 1-10 0H5a7 7 0 0 0 7 7z"/>
+            </svg>
+          </button>
+  
+          <!-- textarea -->
+          <textarea [(ngModel)]="userInput" name="prompt" rows="1" placeholder="Ask me anything…"
+            class="flex-1 resize-none bg-transparent border border-slate-300 rounded-xl p-3 text-gray-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+  
+          <!-- send -->
+          <button type="submit"
+                  class="p-2 rounded-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50"
+                  [disabled]="!userInput.trim()">
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+            </svg>
+          </button>
+        </form>
+      </footer>
+    </div>
+  </div>
+  
